@@ -24,10 +24,11 @@ namespace Finbourne.Configuration.Sdk.Extensions.Tutorials
         private const string ListenerUriPrefix = "http://localhost:4444/";
         private int _apiCallCount;
 
-        /*This needs to be an object that a method in the Finbourne.Configuration.Sdk.Api will return - This example is from Insights
-        private readonly VendorResponse _mockResponse = new VendorResponse("id", "response", 
-            new List<Link> { new Link("relation", "href", "description", "method")});   
-        */
+        private readonly ConfigurationSet _mockResponse = new ConfigurationSet(DateTimeOffset.UtcNow, "createdBy",
+                                                                               DateTimeOffset.UtcNow, "lastModifiedBy",
+                                                                               "description", new List<ConfigurationItemSummary>(),
+                                                                               new ResourceId(new Scope("scopeName"), new Code("id")),
+                                                                               "Personal");        
 
         [SetUp]
         public void SetUp()
@@ -45,8 +46,7 @@ namespace Finbourne.Configuration.Sdk.Extensions.Tutorials
             _httpListener.Start();
         }
 
-        #region Sync tests
-        /*
+        #region Sync tests        
         [Test]
         public void CallApiMethod_WhenHttpStatusIs400AndRetryConditionIsNotSatisfied_ThrowsApiExceptionWithoutRetry()
         {
@@ -63,7 +63,7 @@ namespace Finbourne.Configuration.Sdk.Extensions.Tutorials
             RetryConfiguration.RetryPolicy = PollyApiRetryHandler.DefaultRetryPolicyWithFallback;
 
             var exception = Assert.Throws<ApiException>(
-                () => _apiFactory.Api<IxxxApi>().GetApiMethodxxx("any")
+                () => _apiFactory.Api<ConfigurationSetsApi>().GetConfigurationSet("Personal","scope", "code", false, "userId")
             );
 
             Assert.That(exception.ErrorContent, Is.EqualTo(someError));
@@ -71,7 +71,7 @@ namespace Finbourne.Configuration.Sdk.Extensions.Tutorials
             // Api was called just once, no retries
             Assert.That(_apiCallCount, Is.EqualTo(expectedNumberOfApiCalls));
         }
-
+        
         [Test]
         public void CallApiMethod_WhenHttpStatusIs200AndRetryConditionIsNotSatisfied_NoPollyRetryIsTriggered()
         {
@@ -86,13 +86,12 @@ namespace Finbourne.Configuration.Sdk.Extensions.Tutorials
 
             RetryConfiguration.RetryPolicy = PollyApiRetryHandler.DefaultRetryPolicyWithFallback;
 
-            var sdkResponse = _apiFactory.Api<IxxxApi>().GetApiMethodxxx("any");
+            var sdkResponse = _apiFactory.Api<ConfigurationSetsApi>().GetConfigurationSet("Personal", "scope", "code", false, "userId");
 
             // Api call should be just called once
             Assert.That(_apiCallCount, Is.EqualTo(expectedNumberOfApiCalls));
             Assert.That(sdkResponse, Is.EqualTo(_mockResponse));
         }
-
         
         [Test]
         [TestCase(409)] // Concurrency
@@ -109,9 +108,9 @@ namespace Finbourne.Configuration.Sdk.Extensions.Tutorials
 
             RetryConfiguration.RetryPolicy = PollyApiRetryHandler.DefaultRetryPolicyWithFallback;
 
-            // Calling GetApiMethodxxx or any other API triggers the flow that triggers polly
+            // Calling GetConfigurationSet or any other API triggers the flow that triggers polly
             var exception = Assert.Throws<ApiException>(
-                () => _apiFactory.Api<IxxxApi>().GetApiMethodxxx("any")
+                () => _apiFactory.Api<ConfigurationSetsApi>().GetConfigurationSet("Personal", "scope", "code", false, "userId")
             );
 
             Assert.That(_apiCallCount, Is.EqualTo(expectedNumberOfApiCalls));
@@ -132,8 +131,8 @@ namespace Finbourne.Configuration.Sdk.Extensions.Tutorials
             }
             RetryConfiguration.RetryPolicy = PollyApiRetryHandler.DefaultRetryPolicy; // No fallback
 
-            // Calling GetApiMethodxxx or any other API triggers the flow that triggers polly
-            var response = _apiFactory.Api<IxxxApi>().GetApiMethodxxx("any");
+            // Calling GetConfigurationSet or any other API triggers the flow that triggers polly
+            var response = _apiFactory.Api<ConfigurationSetsApi>().GetConfigurationSet("Personal", "scope", "code", false, "userId");
 
             Assert.That(_apiCallCount, Is.EqualTo(expectedNumberOfApiCalls));
             Assert.That(response, Is.Null);
@@ -153,8 +152,8 @@ namespace Finbourne.Configuration.Sdk.Extensions.Tutorials
             AddMockHttpResponseToQueue(_httpListener, statusCode: 200, responseContent: _mockResponse.ToJson());
             RetryConfiguration.RetryPolicy = PollyApiRetryHandler.DefaultRetryPolicyWithFallback;
 
-            // Calling GetApiMethodxxx or any other API triggers the flow that triggers polly
-            var sdkResponse = _apiFactory.Api<IxxxApi>().GetApiMethodxxx("any");
+            // Calling GetConfigurationSet or any other API triggers the flow that triggers polly
+            var sdkResponse = _apiFactory.Api<ConfigurationSetsApi>().GetConfigurationSet("Personal", "scope", "code", false, "userId");
 
             Assert.That(sdkResponse, Is.EqualTo(_mockResponse));
             Assert.That(_apiCallCount, Is.EqualTo(expectedNumberOfApiCalls));
@@ -184,8 +183,8 @@ namespace Finbourne.Configuration.Sdk.Extensions.Tutorials
                         retryCount++;
                     });
 
-            // Calling GetApiMethodxxx or any other API triggers the flow that triggers polly
-            var sdkResponse = _apiFactory.Api<IxxxApi>().GetApiMethodxxx("any");
+            // Calling GetConfigurationSet or any other API triggers the flow that triggers polly
+            var sdkResponse = _apiFactory.Api<ConfigurationSetsApi>().GetConfigurationSet("Personal", "scope", "code", false, "userId");
 
             Assert.That(retryCount, Is.EqualTo(expectedNumberOfRetries));
             Assert.That(_apiCallCount, Is.EqualTo(expectedNumberOfApiCalls));
@@ -224,11 +223,11 @@ namespace Finbourne.Configuration.Sdk.Extensions.Tutorials
                 );
 
             var exception = Assert.Throws<ApiException>(
-                () => _apiFactory.Api<IxxxApi>().GetApiMethodxxx("any"));
+                () => _apiFactory.Api<ConfigurationSetsApi>().GetConfigurationSet("Personal", "scope", "code", false, "userId"));
 
             Assert.That(_apiCallCount, Is.EqualTo(expectedNumberOfApiCalls));
             Assert.That(exception.ErrorCode, Is.EqualTo(0));
-       Assert.That(exception.Message, Contains.Substring("Internal SDK error occurred when calling GetApiMethodxxx: An error occurred while sending the request"));
+       Assert.That(exception.Message, Contains.Substring("Internal SDK error occurred when calling GetConfigurationSet: An error occurred while sending the request"));
         }
 
         [Test]
@@ -255,8 +254,8 @@ namespace Finbourne.Configuration.Sdk.Extensions.Tutorials
                 .Retry(retryCount: 3, onRetry: (result, i) => policy2TriggerCount++);
             RetryConfiguration.RetryPolicy = policy1.Wrap(policy2);
 
-            // Calling GetApiMethodxxx or any other API triggers the flow that triggers polly
-            var sdkResponse = _apiFactory.Api<IxxxApi>().GetApiMethodxxx("any");
+            // Calling GetConfigurationSet or any other API triggers the flow that triggers polly
+            var sdkResponse = _apiFactory.Api<ConfigurationSetsApi>().GetConfigurationSet("Personal", "scope", "code", false, "userId");
 
             Assert.That(policy1TriggerCount, Is.EqualTo(2));
             Assert.That(policy2TriggerCount, Is.EqualTo(1));
@@ -279,22 +278,20 @@ namespace Finbourne.Configuration.Sdk.Extensions.Tutorials
                 timeoutAfterMillis + 10);
             RetryConfiguration.RetryPolicy = PollyApiRetryHandler.DefaultRetryPolicyWithFallback;
 
-            // Calling GetApiMethodxxx or any other API triggers the flow that triggers polly
+            // Calling GetConfigurationSet or any other API triggers the flow that triggers polly
 
             var exception = Assert.Throws<ApiException>(
-                () => _apiFactory.Api<IxxxApi>().GetApiMethodxxx("any"));
+                () => _apiFactory.Api<ConfigurationSetsApi>().GetConfigurationSet("Personal", "scope", "code", false, "userId"));
 
             Assert.That(_apiCallCount, Is.EqualTo(expectedNumberOfApiCalls));
             // Notice that Sync throws different error message than async
             Assert.That(exception.ErrorContent, Contains.Substring("The operation has timed out"));
             Assert.That(exception.ErrorCode, Is.EqualTo(0));
 
-       }
-       */
-       #endregion
+        }
+        #endregion
 
         #region Async tests
-        /*
         [Test]
         public async Task CallApiMethodAsync_WhenHttpStatusIs200AndRetryConditionIsNotSatisfied_NoPollyRetryIsTriggered()
         {
@@ -309,7 +306,7 @@ namespace Finbourne.Configuration.Sdk.Extensions.Tutorials
 
             RetryConfiguration.AsyncRetryPolicy = PollyApiRetryHandler.DefaultRetryPolicyWithFallbackAsync;
 
-            var sdkResponse = await _apiFactory.Api<IxxxApi>().GetApiMethodxxxAsync("any");
+            var sdkResponse = await _apiFactory.Api<ConfigurationSetsApi>().GetConfigurationSetAsync("Personal", "scope", "code", false, "userId");
 
             // Api call should be just called once
             Assert.That(_apiCallCount, Is.EqualTo(expectedNumberOfApiCalls));
@@ -330,8 +327,8 @@ namespace Finbourne.Configuration.Sdk.Extensions.Tutorials
             AddMockHttpResponseToQueue(_httpListener, statusCode: 200, responseContent: _mockResponse.ToJson());
             RetryConfiguration.RetryPolicy = PollyApiRetryHandler.DefaultRetryPolicyWithFallback;
 
-            // Calling GetApiMethodxxxAsync or any other API triggers the flow that triggers polly
-            var sdkResponse = await _apiFactory.Api<IxxxApi>().GetApiMethodxxxAsync("any");
+            // Calling GetConfigurationSet or any other API triggers the flow that triggers polly
+            var sdkResponse = await _apiFactory.Api<ConfigurationSetsApi>().GetConfigurationSetAsync("Personal", "scope", "code", false, "userId");
 
             Assert.That(sdkResponse, Is.EqualTo(_mockResponse));
             Assert.That(_apiCallCount, Is.EqualTo(expectedNumberOfApiCalls));
@@ -352,9 +349,9 @@ namespace Finbourne.Configuration.Sdk.Extensions.Tutorials
 
             // Calling API triggers the flow that triggers polly
             var exception = Assert.ThrowsAsync<ApiException>(
-                 () => _apiFactory.Api<IxxxApi>().GetApiMethodxxxAsync("any"));
+                 () => _apiFactory.Api<ConfigurationSetsApi>().GetConfigurationSetAsync("Personal", "scope", "code", false, "userId"));
 
-            Assert.That(exception.Message, Is.EqualTo($"Error calling GetApiMethodxxx: {expectedErrorResponse}"));
+            Assert.That(exception.Message, Is.EqualTo($"Error calling GetConfigurationSet: {expectedErrorResponse}"));
             Assert.That(exception.ErrorCode, Is.EqualTo(returnedStatusCode));
             Assert.That(_apiCallCount, Is.EqualTo(expectedNumberOfApiCalls));
         }
@@ -372,8 +369,8 @@ namespace Finbourne.Configuration.Sdk.Extensions.Tutorials
             }
             RetryConfiguration.AsyncRetryPolicy = PollyApiRetryHandler.DefaultRetryPolicyAsync; // No fallback
 
-            // Calling GetApiMethodxxxAsync or any other API triggers the flow that triggers polly
-            var response = await _apiFactory.Api<IxxxApi>().GetApiMethodxxxAsync("any");
+            // Calling GetConfigurationSet or any other API triggers the flow that triggers polly
+            var response = await _apiFactory.Api<ConfigurationSetsApi>().GetConfigurationSetAsync("Personal", "scope", "code", false, "userId");
 
             // Policies with no fallback return null
             Assert.That(response, Is.Null);
@@ -411,9 +408,9 @@ namespace Finbourne.Configuration.Sdk.Extensions.Tutorials
             );
 
 
-            // Calling GetApiMethodxxxAsync or any other API triggers the flow that triggers polly
+            // Calling GetConfigurationSet or any other API triggers the flow that triggers polly
             var exception = Assert.ThrowsAsync<ApiException>(
-                () => _apiFactory.Api<IxxxApi>().GetApiMethodxxxAsync("any"));
+                () => _apiFactory.Api<ConfigurationSetsApi>().GetConfigurationSetAsync("Personal", "scope", "code", false, "userId"));
 
             Assert.That(_apiCallCount, Is.EqualTo(expectedNumberOfApiCalls));
             Assert.That(exception.ErrorCode, Is.EqualTo(0));
@@ -435,14 +432,13 @@ namespace Finbourne.Configuration.Sdk.Extensions.Tutorials
             RetryConfiguration.AsyncRetryPolicy = PollyApiRetryHandler.DefaultRetryPolicyWithFallbackAsync;
 
             var exception = Assert.ThrowsAsync<ApiException>(
-                () => _apiFactory.Api<IxxxApi>().GetApiMethodxxxAsync("any"));
+                () => _apiFactory.Api<ConfigurationSetsApi>().GetConfigurationSetAsync("Personal", "scope", "code", false, "userId"));
 
             Assert.That(_apiCallCount, Is.EqualTo(expectedNumberOfApiCalls));
             // Notice that Async throws different error message than Sync
             Assert.That(exception.ErrorContent, Contains.Substring("The request timed-out"));
             Assert.That(exception.ErrorCode, Is.EqualTo(0));
         }
-        */
         #endregion
 
         [TearDown]

@@ -18,57 +18,47 @@ namespace Finbourne.Configuration.Sdk.Extensions.Tutorials
         [Test]
         public void GetRequestId_CanExtract_RequestId()
         {
-            /* TODO: Test with a valid API Method
-            var apiResponse = _factory.Api<xxxApi>().GetMethodxxxWithHttpInfo();
+            var apiResponse = _factory.Api<ConfigurationSetsApi>().ListConfigurationSetsWithHttpInfo("Personal");
             var requestId = apiResponse.GetRequestId();
             StringAssert.IsMatch(RequestIdRegexPattern, requestId);
-            */
         }
 
         [Test]
         public void GetRequestId_MissingHeader_ReturnsNull_RequestId()
         {
-            /* TODO: Test with a valid API Method
-            var apiResponse = _factory.Api<xxxApi>().GetMethodxxxWithHttpInfo();
+            var apiResponse = _factory.Api<ConfigurationSetsApi>().ListConfigurationSetsWithHttpInfo("Personal");
             // Remove header containing access token
             apiResponse.Headers.Remove(ApiResponseExtensions.RequestIdHeader);
             var requestId = apiResponse.GetRequestId();
             Assert.That(requestId, Is.Null);
-            */
         }
 
         [Test]
         public void GetRequestDateTime_CanExtract_DateHeader()
         {
-            /* TODO: Test with a valid API Method
-            var apiResponse = _factory.Api<xxxApi>().GetMethodxxxWithHttpInfo();
+            var apiResponse = _factory.Api<ConfigurationSetsApi>().ListConfigurationSetsWithHttpInfo("Personal");
             var date = apiResponse.GetRequestDateTime();
             Assert.IsNotNull(date);
-            */
         }
 
         [Test]
         public void GetRequestDateTime_InvalidDateHeader_ReturnsNull_DateHeader()
         {
-            /* TODO: Test with a valid API Method
-            var apiResponse = _factory.Api<xxxApi>().GetMethodxxxWithHttpInfo();
+            var apiResponse = _factory.Api<ConfigurationSetsApi>().ListConfigurationSetsWithHttpInfo("Personal");
             // Invalidate header containing access token
             apiResponse.Headers[ApiResponseExtensions.DateHeader] = new[] { "invalid" };
             var date = apiResponse.GetRequestDateTime();
             Assert.IsNull(date);
-            */
         }
 
         [Test]
         public void GetRequestDateTime_MissingHeader_ReturnsNull_DateHeader()
         {
-            /* TODO: Test with a valid API Method
-            var apiResponse = _factory.Api<xxxApi>().GetMethodxxxWithHttpInfo();
+            var apiResponse = _factory.Api<ConfigurationSetsApi>().ListConfigurationSetsWithHttpInfo("Personal");
             // Remove header containing access token
             apiResponse.Headers.Remove(ApiResponseExtensions.DateHeader);
             var date = apiResponse.GetRequestDateTime();
             Assert.IsNull(date);
-            */
         }
     }
 }

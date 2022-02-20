@@ -24,8 +24,7 @@ namespace Finbourne.Configuration.Sdk.Extensions.Tutorials
         {
             try
             {
-                //TODO: Test with a valid API Method
-                //_factory.Api<Api.xxxApi>().Methodxxx("$@!-");
+                _factory.Api<ConfigurationSetsApi>().GetConfigurationItem("type_$@!-", "scope_$@!-", "code_$@!-", "key_$@!-", false, "userId_$@!-");
             }
             catch (ApiException e)
             {
@@ -38,8 +37,7 @@ namespace Finbourne.Configuration.Sdk.Extensions.Tutorials
         {
             try
             {
-                //TODO: Test with a valid API Method
-                //_factory.Api<Api.xxxApi>().Methodxxx("$@!-");
+                _factory.Api<ConfigurationSetsApi>().GetConfigurationItem("type_$@!-", "scope_$@!-", "code_$@!-", "key_$@!-", false, "userId_$@!-");
             }
             catch (ApiException e)
             {
@@ -63,8 +61,7 @@ namespace Finbourne.Configuration.Sdk.Extensions.Tutorials
         {
             try
             {
-                //TODO: Test with a valid API Method
-                //_factory.Api<Api.xxxApi>().Methodxxx("$@!-");
+                _factory.Api<ConfigurationSetsApi>().GetConfigurationItem("type_$@!-", "scope_$@!-", "code_$@!-", "key_$@!-", false, "userId_$@!-");
             }
             catch (ApiException e)
             {
@@ -79,14 +76,13 @@ namespace Finbourne.Configuration.Sdk.Extensions.Tutorials
         {
             try
             {
-                //TODO: Test with a valid API Method
-                //_factory.Api<Api.xxxApi>().Methodxxx("no-scope", "no-code", someObject);
+                _factory.Api<ConfigurationSetsApi>().GetConfigurationItem("type_$@!-", "scope_$@!-", "code_$@!-", "key_$@!-", false, "userId_$@!-");
             }
             catch (ApiException e)
             {
                 //    ApiException.ErrorContent contains a JSON serialized ErrorResponse
                 LusidProblemDetails errorResponse = e.ProblemDetails();
-                Assert.That(errorResponse.Name, Is.EqualTo("SubscriptionNotFound"));
+                Assert.That(errorResponse.Name, Is.EqualTo("InvalidRequestFailure"));
             }
         }
 
@@ -95,8 +91,7 @@ namespace Finbourne.Configuration.Sdk.Extensions.Tutorials
         {
             try
             {
-                //TODO: Test with a valid API Method
-                //_factory.Api<Api.xxxApi>().Methodxxx("@£$@£%", "#####", someObject);
+                _factory.Api<ConfigurationSetsApi>().GetConfigurationItem("type_$@!-", "scope_$@!-", "code_$@!-", "key_$@!-", false, "userId_$@!-");
             }
             catch (ApiException e)
             {
@@ -132,8 +127,7 @@ namespace Finbourne.Configuration.Sdk.Extensions.Tutorials
             {
                 var testScope = new string('a', 100);
                 var testCode = new string('b', 100);
-                //TODO: Test with a valid API Method
-                //_factory.Api<Api.xxxApi>().Methodxxx(testScope, testCode, someObject);
+                _factory.Api<ConfigurationSetsApi>().GetConfigurationItem("type_$@!-", testScope, testCode, "key_$@!-", false, "userId_$@!-");
             }
             catch (ApiException e)
             {
