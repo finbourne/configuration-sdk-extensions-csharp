@@ -11,7 +11,7 @@ For more details on other applications in the LUSID platform, see [Understanding
 
 ## Installation
 
-The NuGet package for the FINBOURNE Configuration Store SDK can installed from https://www.nuget.org/packages/Finbourne.Configuration.Sdk.Extensions.Preview using the following:
+The NuGet package for the FINBOURNE Configuration Store SDK can installed from https://www.nuget.org/packages/Finbourne.Configuration.Sdk.Extensions using the following:
 
 ```
 $ dotnet add package Finbourne.Configuration.Sdk.Extensions
