@@ -1,7 +1,7 @@
 using Finbourne.Configuration.Sdk.Api;
 using NUnit.Framework;
 
-namespace Finbourne.Configuration.Sdk.Extensions.Tutorials
+namespace Finbourne.Configuration.Sdk.Extensions.IntegrationTests
 {
     [TestFixture]
     public class ApiResponseExtensionsTest

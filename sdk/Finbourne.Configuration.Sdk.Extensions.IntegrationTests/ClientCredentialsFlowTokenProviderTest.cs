@@ -3,9 +3,9 @@ using System;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
-namespace Finbourne.Configuration.Sdk.Extensions.Tutorials
+namespace Finbourne.Configuration.Sdk.Extensions.IntegrationTests
 {
-    //Test requires [assembly: InternalsVisibleTo("Finbourne.Configuration.Sdk.Extensions.Tutorials")] in ClientCredentialsFlowTokenProvider
+    //Test requires [assembly: InternalsVisibleTo("Finbourne.Configuration.Sdk.Extensions.IntegrationTests")] in ClientCredentialsFlowTokenProvider
     [TestFixture]
     public class ClientCredentialsFlowTokenProviderTest
     {

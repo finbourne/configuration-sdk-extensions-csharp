@@ -2,10 +2,10 @@ version: "3"
 
 services:
 
-  configuration-sdk-extensions-csharp-preview-test:
+  configuration-sdk-extensions-csharp-test:
     build: .
-    container_name: configuration-sdk-extensions-csharp-preview-test
-    image: finbourne/configuration-sdk-extensions-csharp-preview-test
+    container_name: configuration-sdk-extensions-csharp-test
+    image: finbourne/configuration-sdk-extensions-csharp-test
     environment:
       - FBN_TOKEN_URL
       - FBN_USERNAME

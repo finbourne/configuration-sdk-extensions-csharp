@@ -7,7 +7,7 @@
     <Company>FINBOURNE Technology Limited</Company>
 	  <Product>LUSID</Product>
 	  <Description>FINBOURNE Configuration Store SDK Extensions</Description>
-	  <RepositoryUrl>https://github.com/finbourne/configuration-sdk-extensions-csharp-preview</RepositoryUrl>
+	  <RepositoryUrl>https://github.com/finbourne/configuration-sdk-extensions-csharp</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <DocumentationFile></DocumentationFile>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>

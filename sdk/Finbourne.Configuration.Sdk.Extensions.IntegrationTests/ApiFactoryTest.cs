@@ -4,7 +4,7 @@ using Finbourne.Configuration.Sdk.Model;
 using NUnit.Framework;
 using System;
 
-namespace Finbourne.Configuration.Sdk.Extensions.Tutorials
+namespace Finbourne.Configuration.Sdk.Extensions.IntegrationTests
 {
     public class ApiFactoryTest
     {

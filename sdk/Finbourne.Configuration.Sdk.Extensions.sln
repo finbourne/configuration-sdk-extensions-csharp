@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Finbourne.Configuration.Sdk
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Finbourne.Configuration.Sdk.Extensions.Tests", "Finbourne.Configuration.Sdk.Extensions.Tests\Finbourne.Configuration.Sdk.Extensions.Tests.csproj", "{FD2096D7-B4CE-4D65-9463-F270594E70A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Finbourne.Configuration.Sdk.Extensions.Tutorials", "Finbourne.Configuration.Sdk.Extensions.Tutorials\Finbourne.Configuration.Sdk.Extensions.Tutorials.csproj", "{628CCADE-AAB3-4C5A-8249-FB1B4113620B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Finbourne.Configuration.Sdk.Extensions.IntegrationTests", "Finbourne.Configuration.Sdk.Extensions.IntegrationTests\Finbourne.Configuration.Sdk.Extensions.IntegrationTests.csproj", "{628CCADE-AAB3-4C5A-8249-FB1B4113620B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

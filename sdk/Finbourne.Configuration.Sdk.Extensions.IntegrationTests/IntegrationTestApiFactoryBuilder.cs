@@ -1,6 +1,6 @@
 using System.IO;
 
-namespace Finbourne.Configuration.Sdk.Extensions.Tutorials
+namespace Finbourne.Configuration.Sdk.Extensions.IntegrationTests
 {
     public  class IntegrationTestApiFactoryBuilder
     {

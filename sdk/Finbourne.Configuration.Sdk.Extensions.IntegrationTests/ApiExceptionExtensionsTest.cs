@@ -6,7 +6,7 @@ using NUnit.Framework;
 using System.Linq;
 using System.Net;
 
-namespace Finbourne.Configuration.Sdk.Extensions.Tutorials
+namespace Finbourne.Configuration.Sdk.Extensions.IntegrationTests
 {
     [TestFixture]
     public class ApiExceptionExtensionsTest
