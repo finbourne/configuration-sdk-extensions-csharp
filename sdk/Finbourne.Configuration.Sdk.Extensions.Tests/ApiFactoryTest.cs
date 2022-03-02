@@ -25,7 +25,7 @@ namespace Finbourne.Configuration.Sdk.Extensions.Tests
             ApiConfiguration apiConfig = new ApiConfiguration
             {
                 TokenUrl = "http://finbourne.com",
-                ApiUrl = "xyz"
+                ConfigurationUrl = "xyz"
             };
 
             Assert.That(
