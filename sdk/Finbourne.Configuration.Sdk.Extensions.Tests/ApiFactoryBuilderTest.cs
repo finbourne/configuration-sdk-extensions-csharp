@@ -17,7 +17,7 @@ namespace Finbourne.Configuration.Sdk.Extensions.Tests
             {
                 ["api"] = new Dictionary<string, string>()
                 {
-                    {"apiUrl", "https://sub-domain.lusid.com/api"},
+                    {string.Format("{0}Url", "configuration"), "https://sub-domain.lusid.com/api"},
                     {"tokenUrl", "https://sub-domain.okta.com/oauth2/abcd123/v1/token"},
                     {"clientId", "<clientId>"},
                     {"clientSecret", "<clientSecret>"},

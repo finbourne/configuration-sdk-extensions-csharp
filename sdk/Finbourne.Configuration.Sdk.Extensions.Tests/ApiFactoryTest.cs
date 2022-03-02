@@ -20,7 +20,7 @@ namespace Finbourne.Configuration.Sdk.Extensions.Tests
         }
 
         [Test]
-        public void InvalidApiUrl_ThrowsException()
+        public void InvalidConfigurationUrl_ThrowsException()
         {
             ApiConfiguration apiConfig = new ApiConfiguration
             {

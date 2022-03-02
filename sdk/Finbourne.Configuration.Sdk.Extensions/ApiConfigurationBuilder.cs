@@ -14,7 +14,7 @@ namespace Finbourne.Configuration.Sdk.Extensions
         private static readonly Dictionary<string, string> ConfigNamesToEnvVariables = new Dictionary<string, string>()
             {
                 { "TokenUrl", "FBN_TOKEN_URL" },
-                { "ApiUrl", "FBN_CONFIGURATION_API_URL" },
+                { "ConfigurationUrl", "FBN_CONFIGURATION_API_URL" },
                 { "ClientId", "FBN_CLIENT_ID" },
                 { "ClientSecret", "FBN_CLIENT_SECRET" },
                 { "Username", "FBN_USERNAME" },
@@ -24,7 +24,7 @@ namespace Finbourne.Configuration.Sdk.Extensions
         private static readonly Dictionary<string, string> ConfigNamesToSecrets = new Dictionary<string, string>()
         {
             { "TokenUrl", "tokenUrl" },
-            { "ApiUrl", "apiUrl" },
+            { "ConfigurationUrl", "configurationUrl" },
             { "ClientId", "clientId" },
             { "ClientSecret", "clientSecret" },
             { "Username", "username" },
