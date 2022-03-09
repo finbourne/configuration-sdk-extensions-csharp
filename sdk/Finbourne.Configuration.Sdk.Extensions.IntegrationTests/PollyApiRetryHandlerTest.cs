@@ -28,7 +28,7 @@ namespace Finbourne.Configuration.Sdk.Extensions.IntegrationTests
         private readonly ConfigurationSet _mockResponse = new ConfigurationSet(DateTimeOffset.UtcNow, "createdBy",
             DateTimeOffset.UtcNow, "lastModifiedBy",
             "description", new List<ConfigurationItemSummary>(),
-            new ResourceId(new Scope("scopeName"), new Code("id")),
+            new ResourceId("scopeName", "id"),
             "Personal");
 
         [SetUp]
