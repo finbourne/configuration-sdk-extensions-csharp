@@ -552,8 +552,8 @@ namespace Finbourne.Configuration.Sdk.Extensions.IntegrationTests
 
         // Default timeout config is 100000 seconds (1min40s)
         [Test]
-        public void
-            CallApiMethodAsync_WhenRequestTimeExceedsTimeoutConfigured_NoRetryIsTriggeredOnClientTimeout_Throws()
+        [Explicit("Only run this locally. Given the timeout and the retries running this in the pipeline across all SDKs takes too long")]
+        public void CallApiMethodAsync_WhenRequestTimeExceedsTimeoutConfigured_NoRetryIsTriggeredOnClientTimeout_Throws()
         {
             var timeoutAfterMillis = GlobalConfiguration.Instance.Timeout;
             const int returnedStatusCode = 200; // Doesn't matter what code is on timeout, will always return 0
