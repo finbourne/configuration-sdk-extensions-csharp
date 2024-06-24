@@ -1,5 +1,7 @@
+![LUSID_by_Finbourne](./resources/Finbourne_Logo_Teal.svg)
+
+
 # LUSID<sup>®</sup> Configuration SDK Extensions C#
-![LUSID by Finbourne](https://content.finbourne.com/LUSID_repo.png)
 
 These are the C# SDK Extensions to accompany the [C# SDK (Preview) for the Configuration Store application](https://github.com/finbourne/configuration-sdk-csharp-preview). The Configuration Store provides a secure central repository for secrets and parameters (like the AWS Parameter Store).
 
